@@ -8,8 +8,10 @@ namespace SpartaTextRPG
 {
     internal class Dungeon : IScene
     {
-        public Dungeon() { }
-        public Dungeon(ICharacter player) { this._player = player; }
+        public Dungeon()
+        {
+            this._player = MainGame.Instance.player;
+        }
 
         private ICharacter _player;
         public void SceneMenuDraw()

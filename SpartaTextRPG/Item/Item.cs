@@ -6,15 +6,24 @@ using System.Threading.Tasks;
 
 namespace SpartaTextRPG
 {
+    enum ItemType { ItemType_Weapon , ItemType_Armor}
     internal class Item
     {
-        string Name { get; set; }
-        string Description { get; }
+        public string Name { get; set; }
+        public string Description { get; }
+        public int Bonus { get; set; }
 
-        public Item(string _Name , string _Des)
+        public ItemType Type { get; set; }
+
+        public int Price { get; set; }
+
+        public Item(string _Name , string _Des , ItemType _Type , int _Bonus , int _Price)
         {
             Name = _Name; 
             Description = _Des;
+            Type = _Type;
+            Bonus = _Bonus;
+            Price = _Price;
         }
     }
 }
@@ -24,4 +33,5 @@ namespace SpartaTextRPG
 
 일단 확장성 생각해서 만듦
 아이템을 장착 / 소비 나누자
+
  */

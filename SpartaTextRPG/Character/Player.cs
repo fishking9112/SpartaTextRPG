@@ -38,8 +38,13 @@ namespace SpartaTextRPG
         }
 
         ///////// Player
-        ///
+        /// <summary>
+        /// 
+        /// </summary>
 
         public int Gold { get; set; }
+
+        //인벤토리
+        public List<Item> InvenItemList = new List<Item>();
     }
 }

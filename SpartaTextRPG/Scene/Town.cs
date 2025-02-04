@@ -16,6 +16,7 @@ namespace SpartaTextRPG
         private ICharacter _player;
         public  void SceneMenuDraw()
         {
+            Console.Clear();
             Console.WriteLine("Town Scene");
             Console.WriteLine("1. 상태보기");
             Console.WriteLine("2. 인벤토리");

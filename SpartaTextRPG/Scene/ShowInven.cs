@@ -8,8 +8,10 @@ namespace SpartaTextRPG
 {
     internal class ShowInven : IScene
     {
-        public ShowInven() { }
-        public ShowInven(ICharacter player) { this._player = player; }
+        public ShowInven()
+        {
+            this._player = MainGame.Instance.player;
+        }
 
         private ICharacter _player;
 
