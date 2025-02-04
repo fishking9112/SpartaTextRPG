@@ -22,11 +22,12 @@ namespace SpartaTextRPG
             // 이거
             Console.WriteLine("[ ShopInit ]");
 
-            ShopItemList.Add(new Item("TestItem_1" , "Test_1" , ItemType.ItemType_Weapon , 5 , 100));
-            ShopItemList.Add(new Item("TestItem_2", "Test_2", ItemType.ItemType_Weapon, 15 , 200));
-            ShopItemList.Add(new Item("TestItem_3", "Test_3", ItemType.ItemType_Weapon, 35 , 300));
-            ShopItemList.Add(new Item("TestItem_4", "Test_4", ItemType.ItemType_Armor, 5 , 100));
-            ShopItemList.Add(new Item("TestItem_5", "Test_5", ItemType.ItemType_Armor, 15 , 300));
+            ShopItemList.Add(new Item("낡은 검" , "쉽게 볼 수 있는 낡은 검 입니다." , ItemType.ItemType_Weapon , 2 , 600));
+            ShopItemList.Add(new Item("청동 도끼", "어디선가 사용됐던거 같은 도끼입니다.", ItemType.ItemType_Weapon, 5 , 1500));
+            ShopItemList.Add(new Item("스파르타의 창", "스파르타의 전사들이 사용했다는 전설의 창입니다.", ItemType.ItemType_Weapon, 7 , 2500));
+            ShopItemList.Add(new Item("수련자 갑옷", "수련에 도움을 주는 갑옷입니다.", ItemType.ItemType_Armor, 5 , 1000));
+            ShopItemList.Add(new Item("무쇠 갑옷", "무쇠로 만들어져 튼튼한 갑옷입니다.", ItemType.ItemType_Armor, 9 , 2000));
+            ShopItemList.Add(new Item("스파르타의 갑옷", "스파르타의 전사들이 사용했다는 전설의 갑옷입니다.", ItemType.ItemType_Armor, 15, 3500));
 
         }
         public void ShowShopMenu(bool isBuying)
