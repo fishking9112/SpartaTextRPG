@@ -18,9 +18,10 @@ namespace SpartaTextRPG
         {
             Console.Clear();
             Console.WriteLine("Town Scene");
-            Console.WriteLine("1. 상태보기");
-            Console.WriteLine("2. 인벤토리");
-            Console.WriteLine("3. 상점");
+            Console.WriteLine("1. [ 상태보기 ]");
+            Console.WriteLine("2. [ 인벤토리 ]");
+            Console.WriteLine("3. [  상  점  ]");
+            Console.WriteLine("4. [  여  관  ]");
             Console.WriteLine(" 선택 : ");
 
             int iSelect = int.Parse( Console.ReadLine() );

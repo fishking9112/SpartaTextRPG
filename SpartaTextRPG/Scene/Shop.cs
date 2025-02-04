@@ -40,10 +40,14 @@ namespace SpartaTextRPG
                     Console.Write($"- {MenuNumber} ");
                 else
                     Console.Write($"- ");
-              
-                Console.Write($"{item.Name}\t\t");
 
-                if(item.Type == Item_Type.ITEM_EQUIP)
+                //이름 칸맞추기
+                if (item.Name.Length > 6)
+                    Console.Write($"{item.Name}\t");
+                else
+                    Console.Write($"{item.Name}\t\t");
+
+                if (item.Type == Item_Type.ITEM_EQUIP)
                 {
                     Equip_Item equip = item as Equip_Item;
                     if(equip.SlotType == ItemSlotType.ITEMTYPE_WEAPON)
@@ -74,6 +78,7 @@ namespace SpartaTextRPG
 
             Console.WriteLine(" 0. 나가기 : ");
             Console.WriteLine(" 1. 아이템 구매 : ");
+            Console.WriteLine(" 2. 아이템 판매 : ");
             Console.WriteLine(" 선택 : ");
 
             int iSelect = int.Parse(Console.ReadLine());
@@ -85,6 +90,9 @@ namespace SpartaTextRPG
                     break;
                 case 1://아이템 구매
                     BuyItem();
+                    break;
+                case 2:
+                    SellItem();
                     break;
                 default://다시 상점 띄워주기
                     SceneManager.Instance.MoveScene(SceneManager.EnumScene.SCENE_SHOP);
@@ -161,6 +169,112 @@ namespace SpartaTextRPG
                     Console.WriteLine($"{SelectItem.Name} 은 이미 인벤토리에 있습니다.");
                     Thread.Sleep(1000);
                 }
+            }
+        }
+        
+        private void ShowSellMenu()
+        {
+            List<Item> InvenItemList = ((Player)_player).InvenItemList;
+
+            int MenuNumber = 1;
+            foreach (Item item in InvenItemList)
+            {
+                // 목록 번호 넣기
+                
+                Console.Write($"- {MenuNumber} ");
+
+                // 장창중인 아이템에 [E] 표시
+                if (item is Equip_Item)
+                {
+                    Equip_Item equip = item as Equip_Item;
+                    if (equip.IsEquip == true)
+                    {
+                        Console.Write($"[E]");
+                    }
+                }
+
+                //이름 칸맞추기
+                if(item.Name.Length > 6)
+                    Console.Write($"{item.Name}\t");
+                else
+                    Console.Write($"{item.Name}\t\t");
+
+                if (item is Equip_Item)
+                {
+                    Equip_Item equip = item as Equip_Item;
+                    if (equip.SlotType == ItemSlotType.ITEMTYPE_WEAPON)
+                    {
+                        Console.Write($"| 공격력");
+                    }
+                    else
+                    {
+                        Console.Write($"| 방어력");
+                    }
+                }
+
+                Console.Write($" + {item.Bonus}\t");
+
+                //판매 가격은 구매가격의 85%
+                float sellPrice = ((float)item.Price / 100) * 85;
+
+                Console.Write($"| {(int)sellPrice}\t");
+                Console.WriteLine($"| {item.Description}\t");
+
+                MenuNumber++;
+            }
+        }
+        private void SellItem()
+        {
+            while(true)
+            {
+                List<Item> InvenItemList = ((Player)_player).InvenItemList;
+
+                Console.Clear();
+
+                Console.WriteLine("[ 상점 - 아이템 판매]");
+                Console.WriteLine($"현재 보유 금화 : {((Player)_player).Gold}");
+
+                ShowSellMenu();
+
+                Console.WriteLine(" 0. 나가기 : ");
+
+                int iSelect = int.Parse(Console.ReadLine());
+
+                if (iSelect == 0)   // 나가기
+                {
+                    SceneManager.Instance.MoveScene(SceneManager.EnumScene.SCENE_TOWN);
+                    break;
+                }
+
+
+                if (iSelect < 0 || iSelect > InvenItemList.Count)
+                {
+                    Console.WriteLine(" 잘못된 입력입니다. ");
+                    Thread.Sleep(1000);
+                    continue;
+                }
+
+                Item SelectItem = InvenItemList[iSelect - 1];
+
+                ///////////선택한 아이템 판매//////////
+
+                //장착중인지 검사
+                //웨폰인지 아머인지
+                ItemSlotType Type = ((Equip_Item)InvenItemList[iSelect - 1]).SlotType;
+
+                if (((Equip_Item)InvenItemList[iSelect - 1]).IsEquip == true) //장착중이면
+                {
+                    //장착슬롯에서 빼주고
+                    ((Player)_player).equip_Item[(int)Type].IsEquip = false;
+                    ((Equip_Item)InvenItemList[iSelect - 1]).IsEquip = false;
+                }
+
+                //리스트에서 해당 아이템 빼기
+                InvenItemList.RemoveAt(iSelect - 1);
+
+                //판매 가격은 구매가격의 85%
+                float sellPrice = ((float)SelectItem.Price / 100) * 85;
+                ((Player)_player).Gold += (int)sellPrice;
             }
         }
     }

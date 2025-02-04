@@ -24,7 +24,7 @@ namespace SpartaTextRPG
 
 
         // Scene 을 위한 Enum
-        public enum EnumScene { SCENE_TOWN , SCENE_STATEVIEW, SCENE_SHOWINVEN, SCENE_SHOP, SCENE_DUNGEON , SCENE_MAX}
+        public enum EnumScene { SCENE_TOWN , SCENE_STATEVIEW, SCENE_SHOWINVEN, SCENE_SHOP, SCENE_INN, SCENE_DUNGEON , SCENE_MAX}
 
         EnumScene curScene = EnumScene.SCENE_TOWN;
         EnumScene PreScene = EnumScene.SCENE_MAX;
@@ -42,6 +42,7 @@ namespace SpartaTextRPG
             SceneList.Add( new StateView());
             SceneList.Add( new ShowInven());
             SceneList.Add( new Shop() );
+            SceneList.Add(new INN());
             SceneList.Add( new Dungeon() );
         }
 

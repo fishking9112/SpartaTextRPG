@@ -65,7 +65,11 @@ namespace SpartaTextRPG
                     }
                 }
 
-                Console.Write($"{item.Name}\t\t");
+                //이름 칸맞추기
+                if (item.Name.Length > 6)
+                    Console.Write($"{item.Name}\t");
+                else
+                    Console.Write($"{item.Name}\t\t");
 
                 if (item is Equip_Item)
                 {
@@ -159,6 +163,7 @@ namespace SpartaTextRPG
                         // 교체
                         // 장착 해제
                         ((Player)_player).equip_Item[(int)Type].IsEquip = false;
+                        ((Equip_Item)InvenItemList[iSelect - 1]).IsEquip = false;
                         // 장착
                         ((Player)_player).equip_Item[(int)Type] = (Equip_Item)InvenItemList[iSelect - 1];
                         ((Equip_Item)InvenItemList[iSelect - 1]).IsEquip = true;
@@ -168,6 +173,7 @@ namespace SpartaTextRPG
                 {
                     // 장착 해제
                     ((Player)_player).equip_Item[(int)Type].IsEquip = false;
+                    ((Equip_Item)InvenItemList[iSelect - 1]).IsEquip = false;
 
                 }
             }
