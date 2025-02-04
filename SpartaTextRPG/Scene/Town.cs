@@ -17,12 +17,12 @@ namespace SpartaTextRPG.Scene
         public  void SceneMenuDraw()
         {
             Console.WriteLine("Town Scene");
-            Console.WriteLine("0. 상태보기");
-            Console.WriteLine("1. 인벤토리");
-            Console.WriteLine("2. 상점");
+            Console.WriteLine("1. 상태보기");
+            Console.WriteLine("2. 인벤토리");
+            Console.WriteLine("3. 상점");
             Console.WriteLine(" 선택 : ");
 
-            int iSelect = int.Parse( Console.ReadLine() );
+            int iSelect = int.Parse( Console.ReadLine() ) - 1;
 
             SceneManager.Instance.MoveScene((SceneManager.EnumScene)iSelect);
         }
