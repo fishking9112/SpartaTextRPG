@@ -10,16 +10,20 @@ namespace SpartaTextRPG
     {
         //생성자에서 초기화
         public Player() { }
-        public Player(string _Name , int _Level , int _MaxHP , int _AttMin , int _AttMax , int _Def , int _Gold) 
+        public Player(string _Name, int _Level, int _MaxHP, int _AttMin, int _AttMax, int _Def, int _Gold)
         {
-            Name = _Name; 
-            Level = _Level; 
+            Name = _Name;
+            Level = _Level;
             HP = _MaxHP;
             MaxHP = _MaxHP;
             AttackPower_Min = _AttMin;
             AttackPower_Max = _AttMax;
             Defense = _Def;
             Gold = _Gold;
+
+            //장착 아이템 초기화
+            equip_Item[(int)ItemSlotType.ITEMTYPE_WEAPON] = null;
+            equip_Item[(int)ItemSlotType.ITEMTYPE_ARMOR] = null;
         }
         public string Name { get; }
         public int Level { get; set; }
@@ -46,5 +50,7 @@ namespace SpartaTextRPG
 
         //인벤토리
         public List<Item> InvenItemList = new List<Item>();
+        //장착
+        public Equip_Item[] equip_Item = new Equip_Item[(int)ItemSlotType.ITEMTYPE_MAX];
     }
 }

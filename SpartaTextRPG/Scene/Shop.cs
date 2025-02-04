@@ -22,15 +22,15 @@ namespace SpartaTextRPG
             // 이거
             Console.WriteLine("[ ShopInit ]");
 
-            ShopItemList.Add(new Item("낡은 검" , "쉽게 볼 수 있는 낡은 검 입니다." , ItemType.ItemType_Weapon , 2 , 600));
-            ShopItemList.Add(new Item("청동 도끼", "어디선가 사용됐던거 같은 도끼입니다.", ItemType.ItemType_Weapon, 5 , 1500));
-            ShopItemList.Add(new Item("스파르타의 창", "스파르타의 전사들이 사용했다는 전설의 창입니다.", ItemType.ItemType_Weapon, 7 , 2500));
-            ShopItemList.Add(new Item("수련자 갑옷", "수련에 도움을 주는 갑옷입니다.", ItemType.ItemType_Armor, 5 , 1000));
-            ShopItemList.Add(new Item("무쇠 갑옷", "무쇠로 만들어져 튼튼한 갑옷입니다.", ItemType.ItemType_Armor, 9 , 2000));
-            ShopItemList.Add(new Item("스파르타의 갑옷", "스파르타의 전사들이 사용했다는 전설의 갑옷입니다.", ItemType.ItemType_Armor, 15, 3500));
+            ShopItemList.Add(new Equip_Item("낡은 검" , "쉽게 볼 수 있는 낡은 검 입니다." , ItemSlotType.ITEMTYPE_WEAPON, 2 , 600 , Item_Type.ITEM_EQUIP));
+            ShopItemList.Add(new Equip_Item("청동 도끼", "어디선가 사용됐던거 같은 도끼입니다.", ItemSlotType.ITEMTYPE_WEAPON, 5 , 1500, Item_Type.ITEM_EQUIP));
+            ShopItemList.Add(new Equip_Item("스파르타의 창", "스파르타의 전사들이 사용했다는 전설의 창입니다.", ItemSlotType.ITEMTYPE_WEAPON, 7 , 2500, Item_Type.ITEM_EQUIP));
+            ShopItemList.Add(new Equip_Item("수련자 갑옷", "수련에 도움을 주는 갑옷입니다.", ItemSlotType.ITEMTYPE_ARMOR, 5 , 1000, Item_Type.ITEM_EQUIP));
+            ShopItemList.Add(new Equip_Item("무쇠 갑옷", "무쇠로 만들어져 튼튼한 갑옷입니다.", ItemSlotType.ITEMTYPE_ARMOR, 9 , 2000, Item_Type.ITEM_EQUIP));
+            ShopItemList.Add(new Equip_Item("스파르타의 갑옷", "스파르타의 전사들이 사용했다는 전설의 갑옷입니다.", ItemSlotType.ITEMTYPE_ARMOR, 15, 3500, Item_Type.ITEM_EQUIP));
 
         }
-        public void ShowShopMenu(bool isBuying)
+        private void ShowShopMenu(bool isBuying)
         {
             int MenuNumber = 1;
             foreach (var item in ShopItemList)
@@ -40,13 +40,22 @@ namespace SpartaTextRPG
                     Console.Write($"- {MenuNumber} ");
                 else
                     Console.Write($"- ");
-
               
-                Console.Write($"{item.Name}\t");
-                if (item.Type == ItemType.ItemType_Weapon)
-                    Console.Write($"| 공격력");
-                else
-                    Console.Write($"| 방어력");
+                Console.Write($"{item.Name}\t\t");
+
+                if(item.Type == Item_Type.ITEM_EQUIP)
+                {
+                    Equip_Item equip = item as Equip_Item;
+                    if(equip.SlotType == ItemSlotType.ITEMTYPE_WEAPON)
+                    {
+                        Console.Write($"| 공격력");
+                    }
+                    else
+                    {
+                        Console.Write($"| 방어력");
+                    }
+                }
+
                 Console.Write($" + {item.Bonus}\t");
                 Console.Write($"| G : {item.Price}\t");
                 Console.WriteLine($"| {item.Description}\t");
@@ -71,16 +80,13 @@ namespace SpartaTextRPG
 
             switch(iSelect)
             {
-                case 0:
-                    //나가기
+                case 0://나가기
                     SceneManager.Instance.MoveScene(SceneManager.EnumScene.SCENE_TOWN);
                     break;
-                case 1:
-                    //아이템 구매
+                case 1://아이템 구매
                     BuyItem();
                     break;
-                default:
-                    //다시 상점 띄워주기
+                default://다시 상점 띄워주기
                     SceneManager.Instance.MoveScene(SceneManager.EnumScene.SCENE_SHOP);
                     break;
             }
@@ -112,7 +118,11 @@ namespace SpartaTextRPG
                 int iSelect = int.Parse(Console.ReadLine());
 
                 if (iSelect == 0)   // 나가기
+                {
                     SceneManager.Instance.MoveScene(SceneManager.EnumScene.SCENE_TOWN);
+                    break;
+                }
+
 
                 if(iSelect < 0 || iSelect > ShopItemList.Count)
                 {

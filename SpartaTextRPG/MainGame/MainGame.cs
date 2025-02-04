@@ -34,7 +34,7 @@ namespace SpartaTextRPG
         public void GameStart()
         {
             //플레이어 초기값 설정
-            player = new Player( "HuckP" , 1 , 100 , 10 , 20 , 5 , 1500);
+            player = new Player( "HuckP" , 1 , 100 , 10 , 20 , 5 , 15500);
 
             SceneManager.Instance.InitScene(player);
             SceneManager.Instance.MoveScene(SceneManager.EnumScene.SCENE_TOWN);

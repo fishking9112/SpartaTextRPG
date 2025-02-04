@@ -6,24 +6,23 @@ using System.Threading.Tasks;
 
 namespace SpartaTextRPG
 {
-    enum ItemType { ItemType_Weapon , ItemType_Armor}
+    enum Item_Type { ITEM_USE , ITEM_EQUIP , ITEM_END }
     internal class Item
     {
         public string Name { get; set; }
         public string Description { get; }
         public int Bonus { get; set; }
-
-        public ItemType Type { get; set; }
+        public Item_Type Type { get; set; }
 
         public int Price { get; set; }
 
-        public Item(string _Name , string _Des , ItemType _Type , int _Bonus , int _Price)
+        public Item(string _Name , string _Des  , int _Bonus , int _Price , Item_Type _Type)
         {
             Name = _Name; 
             Description = _Des;
-            Type = _Type;
             Bonus = _Bonus;
             Price = _Price;
+            Type = _Type;
         }
     }
 }

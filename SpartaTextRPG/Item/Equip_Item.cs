@@ -7,26 +7,17 @@ using System.Threading.Tasks;
 
 namespace SpartaTextRPG
 {
+    enum ItemSlotType { ITEMTYPE_WEAPON, ITEMTYPE_ARMOR, ITEMTYPE_MAX }
     internal class Equip_Item : Item
     {
-        public Equip_Item(string _Name, string _Des, ItemType _Type, int _Bonus, int _Price) : base(_Name, _Des , _Type , _Bonus, _Price)
+        public Equip_Item(string _Name, string _Des, ItemSlotType _SlotType, int _Bonus, int _Price , Item_Type _Type) : base(_Name, _Des , _Bonus, _Price , _Type)
         {
-            Name = _Name;
-            Description = _Des;
-            Type = _Type;
-            Bonus = _Bonus;
-            Price = _Price;
-
             IsEquip = false;
+            SlotType = _SlotType;
         }
 
-        string Name { get; set; }
-        string Description { get; }
-        public int Bonus { get; set; }
-        public ItemType Type { get; set; }
-        public int Price { get; set; }
-
+        public ItemSlotType SlotType { get; set; }
         // 장착 여부
-        bool IsEquip {  get; set; }
+        public bool IsEquip {  get; set; }
     }
 }
