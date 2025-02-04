@@ -1,10 +1,12 @@
-﻿namespace SpartaTextRPG
+﻿using SpartaTextRPG.MainGame;
+
+namespace SpartaTextRPG
 {
     internal class Program
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello, World!");
+            MainGame.MainGame.Instance.GameStart();
         }
     }
 }

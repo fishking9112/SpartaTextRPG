@@ -1,0 +1,20 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace SpartaTextRPG.Scene
+{
+    internal class Shop : IScene
+    {
+        public void SceneMenuDraw()
+        {
+            Console.WriteLine("Shop Scene");
+            Console.WriteLine("1. 상태보기");
+            Console.WriteLine("2. 인벤토리");
+            Console.WriteLine("3. 상점");
+            Console.WriteLine(" 선택 : ");
+        }
+    }
+}
