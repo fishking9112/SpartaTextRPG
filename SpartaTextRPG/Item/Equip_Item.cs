@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SpartaTextRPG.Item
+namespace SpartaTextRPG
 {
     internal class Equip_Item : Item
     {

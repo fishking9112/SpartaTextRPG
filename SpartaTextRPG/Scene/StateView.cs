@@ -1,17 +1,17 @@
-﻿using SpartaTextRPG.Character;
-using SpartaTextRPG.Manager;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SpartaTextRPG.Scene
+namespace SpartaTextRPG
 {
     internal class StateView : IScene
     {
-        public StateView() { }
-        public StateView(ICharacter player) { this._player = player; }
+        public StateView()
+        {
+            this._player = MainGame.Instance.player;
+        }
 
         private ICharacter _player;
         public void SceneMenuDraw()

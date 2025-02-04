@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 // 캐릭터의 인터페이스 cs
 // 플레이어 , 몬스터 둘다 캐릭터 인터페이스를 상속받는다.
 
-namespace SpartaTextRPG.Character
+namespace SpartaTextRPG
 {
     public interface ICharacter
     {

@@ -1,12 +1,10 @@
-﻿using SpartaTextRPG.Character;
-using SpartaTextRPG.Scene;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SpartaTextRPG.Manager
+namespace SpartaTextRPG
 {
     internal class SceneManager
     {
@@ -26,7 +24,7 @@ namespace SpartaTextRPG.Manager
 
 
         // Scene 을 위한 Enum
-        public enum EnumScene { SCENE_STATEVIEW, SCENE_TOWN, SCENE_SHOP, SCENE_DUNGEON , SCENE_MAX}
+        public enum EnumScene { SCENE_TOWN , SCENE_STATEVIEW, SCENE_SHOWINVEN, SCENE_SHOP, SCENE_DUNGEON , SCENE_MAX}
 
         EnumScene curScene = EnumScene.SCENE_TOWN;
         EnumScene PreScene = EnumScene.SCENE_MAX;
@@ -40,8 +38,9 @@ namespace SpartaTextRPG.Manager
         {
             this.player = player;
 
-            SceneList.Add(new StateView(player));
-            SceneList.Add( new Town(player) );
+            SceneList.Add( new Town() );
+            SceneList.Add( new StateView());
+            SceneList.Add( new ShowInven());
             SceneList.Add( new Shop() );
             SceneList.Add( new Dungeon() );
         }

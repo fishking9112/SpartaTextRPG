@@ -1,17 +1,17 @@
-﻿using SpartaTextRPG.Character;
-using SpartaTextRPG.Manager;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SpartaTextRPG.Scene
+namespace SpartaTextRPG
 {
     internal class Town : IScene
     {
-        public Town() { }
-        public Town(ICharacter player) { this._player = player; }
+        public Town()
+        { 
+            this._player = MainGame.Instance.player;
+        }
 
         private ICharacter _player;
         public  void SceneMenuDraw()
@@ -22,7 +22,7 @@ namespace SpartaTextRPG.Scene
             Console.WriteLine("3. 상점");
             Console.WriteLine(" 선택 : ");
 
-            int iSelect = int.Parse( Console.ReadLine() ) - 1;
+            int iSelect = int.Parse( Console.ReadLine() );
 
             SceneManager.Instance.MoveScene((SceneManager.EnumScene)iSelect);
         }

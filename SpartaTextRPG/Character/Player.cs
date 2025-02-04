@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SpartaTextRPG.Character
+namespace SpartaTextRPG
 {
     internal class Player : ICharacter
     {
