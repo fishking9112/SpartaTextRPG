@@ -8,7 +8,6 @@ namespace SpartaTextRPG
 {
     internal class Player : ICharacter
     {
-        //생성자에서 초기화
         public Player() { }
         public Player(string _Name, int _Level, int _MaxHP, int _AttMin, int _AttMax, int _Def, int _Gold)
         {
@@ -25,6 +24,15 @@ namespace SpartaTextRPG
             equip_Item[(int)ItemSlotType.ITEMTYPE_WEAPON] = null;
             equip_Item[(int)ItemSlotType.ITEMTYPE_ARMOR] = null;
         }
+
+        //Player 멤버변수
+        public int Gold { get; set; }
+        //인벤토리
+        public List<Item> InvenItemList = new List<Item>();
+        //장착
+        public Equip_Item[] equip_Item = new Equip_Item[(int)ItemSlotType.ITEMTYPE_MAX];
+
+        //프로퍼티
         public string Name { get; }
         public int Level { get; set; }
         public int HP { get; set; }
@@ -46,11 +54,5 @@ namespace SpartaTextRPG
         /// 
         /// </summary>
 
-        public int Gold { get; set; }
-
-        //인벤토리
-        public List<Item> InvenItemList = new List<Item>();
-        //장착
-        public Equip_Item[] equip_Item = new Equip_Item[(int)ItemSlotType.ITEMTYPE_MAX];
     }
 }
