@@ -84,9 +84,11 @@ namespace SpartaTextRPG
             Console.WriteLine(" 2. 아이템 판매 : ");
             Console.WriteLine(" 선택 : ");
 
-            int iSelect = int.Parse(Console.ReadLine());
-
-            switch(iSelect)
+            if (int.TryParse(Console.ReadLine(), out int iSelect) == false)
+            {
+                SceneManager.Instance.MoveScene(SceneManager.EnumScene.SCENE_SHOP);
+            }
+            switch (iSelect)
             {
                 case 0://나가기
                     SceneManager.Instance.MoveScene(SceneManager.EnumScene.SCENE_TOWN);
@@ -126,7 +128,10 @@ namespace SpartaTextRPG
                  * -> 잘못된 입력입니다 출력
                  */
 
-                int iSelect = int.Parse(Console.ReadLine());
+                if (int.TryParse(Console.ReadLine(), out int iSelect) == false)
+                {
+                    continue;
+                }
 
                 if (iSelect == 0)   // 나가기
                 {
@@ -241,7 +246,10 @@ namespace SpartaTextRPG
 
                 Console.WriteLine(" 0. 나가기 : ");
 
-                int iSelect = int.Parse(Console.ReadLine());
+                if (int.TryParse(Console.ReadLine(), out int iSelect) == false)
+                {
+                    continue;
+                }
 
                 if (iSelect == 0)   // 나가기
                 {

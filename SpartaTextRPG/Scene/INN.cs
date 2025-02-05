@@ -25,7 +25,10 @@ namespace SpartaTextRPG
             Console.WriteLine(" 1. 휴식하기 ");
             Console.WriteLine(" 0. 돌아가기 ");
 
-            int iSelect = int.Parse(Console.ReadLine());
+            if (int.TryParse(Console.ReadLine(), out int iSelect) == false)
+            {
+                SceneManager.Instance.MoveScene(SceneManager.EnumScene.SCENE_INN);
+            }
 
             switch (iSelect)
             {

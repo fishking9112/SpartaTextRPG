@@ -66,9 +66,12 @@ namespace SpartaTextRPG
             Console.WriteLine(" Gold : {0}", _player.Gold);
             Console.WriteLine(" \n 0. 돌아가기 : ");
 
-            int iSelect = int.Parse(Console.ReadLine());
+            if (int.TryParse(Console.ReadLine(), out int iSelect) == false)
+            {
+                SceneManager.Instance.MoveScene(SceneManager.EnumScene.SCENE_STATEVIEW);
+            }
 
-            if( iSelect == 0)
+            if ( iSelect == 0)
                 SceneManager.Instance.MoveScene(SceneManager.EnumScene.SCENE_TOWN);
             else
             {

@@ -22,11 +22,25 @@ namespace SpartaTextRPG
             Console.WriteLine("3. [  상  점  ]");
             Console.WriteLine("4. [  여  관  ]");
             Console.WriteLine("5. [ 던전입장 ]");
+            Console.WriteLine("6. [  저  장  ]");
+            Console.WriteLine("7. [  종  료  ]");
             Console.WriteLine(" 선택 : ");
 
             int iSelect = int.Parse( Console.ReadLine() );
 
-            SceneManager.Instance.MoveScene((SceneManager.EnumScene)iSelect);
+            switch(iSelect)
+            {
+                case 6:     // 저장 하고 다시 TOWN 재입장
+                    PlayerPrefs.getInt();
+                    SceneManager.Instance.MoveScene(SceneManager.EnumScene.SCENE_TOWN);
+                    break;
+                case 7:     // 종료
+                    return;
+
+                default:
+                    SceneManager.Instance.MoveScene((SceneManager.EnumScene)iSelect);
+                    break;
+            }
         }
     }
 }

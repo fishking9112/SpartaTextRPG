@@ -28,7 +28,12 @@ namespace SpartaTextRPG
             Console.WriteLine(" 1. 장착 관리 : ");
             Console.WriteLine(" 선택 : ");
 
-            int iSelect = int.Parse(Console.ReadLine());
+            //int iSelect = int.Parse(Console.ReadLine());
+
+            if (int.TryParse(Console.ReadLine(), out int iSelect) == false)
+            {
+                SceneManager.Instance.MoveScene(SceneManager.EnumScene.SCENE_SHOWINVEN);
+            }
 
             switch (iSelect)
             {
@@ -119,7 +124,10 @@ namespace SpartaTextRPG
                  * 무기를 장착하면 기존 무기가 있다면 해제하고 장착
                  */
 
-                int iSelect = int.Parse(Console.ReadLine());
+                if (int.TryParse(Console.ReadLine(), out int iSelect) == false)
+                {
+                    continue;
+                }
 
                 if (iSelect == 0)   // 나가기
                 {

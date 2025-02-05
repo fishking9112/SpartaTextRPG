@@ -38,9 +38,18 @@ namespace SpartaTextRPG
             Console.WriteLine("1. [  쉬   움 ]");
             Console.WriteLine("2. [  일   반 ]");
             Console.WriteLine("3. [  어려움  ]");
+            Console.WriteLine("0. [ 돌아가기 ]");
             Console.WriteLine(" 선택 : ");
 
-            int iSelect = int.Parse(Console.ReadLine());
+            if (int.TryParse(Console.ReadLine(), out int iSelect) == false)
+            {
+                SceneManager.Instance.MoveScene(SceneManager.EnumScene.SCENE_DUNGEON);
+            }
+
+            if (iSelect == 0)   // 나가기
+            {
+                SceneManager.Instance.MoveScene(SceneManager.EnumScene.SCENE_TOWN);
+            }
 
             bool isClear = EnterDungeon((DUNGEON_LEVEL)iSelect - 1);
 
@@ -114,11 +123,14 @@ namespace SpartaTextRPG
         {
             //던전 보상
             //공격력에 의한 추가보상
-            int AttValue = new Random().Next(_player.FinalAtt(), _player.FinalAtt() * 2);
+            int AttValue = new Random().Next( (int)_player.FinalAtt() , (int)_player.FinalAtt() * 2);
             int RewardBonus = ( dungeonReward[(int)_dungeon_Level] / 100 ) * AttValue;
             int finalReward = dungeonReward[(int)_dungeon_Level] + RewardBonus;
 
             _player.Gold += finalReward;
+
+            //경험치 ( 던전 난이도 따라 경험치 다르게 만들자)
+            _player.ExpUp((int)_dungeon_Level + 1);
 
             Console.WriteLine("[ 던전 클리어 ! ]");
             Console.WriteLine($"클리어 보상 : {dungeonReward[(int)_dungeon_Level]} G + {RewardBonus} G ");

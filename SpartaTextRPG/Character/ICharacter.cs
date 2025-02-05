@@ -15,9 +15,8 @@ namespace SpartaTextRPG
         int Level { get; set; }
         int HP { get; set; }
         int MaxHP { get; set; }
-        int Attack { get; }
-        int AttackPower_Min { get; }
-        int AttackPower_Max { get; }
+        float AttackPower_Min { get; }
+        float AttackPower_Max { get; }
         int Defense { get; set; }
         bool IsDead { get; }
     }
