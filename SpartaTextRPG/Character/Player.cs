@@ -117,6 +117,8 @@ namespace SpartaTextRPG
             bf.Serialize(fs, data);
             fs.Close();
 
+            //브랜치 테스트
+
             // 저장기능 만들다가 실패 ㅠ
             // 시리얼라이즈 해서 바이너리 파일로 만들어보려 했으나 ,
             // 방법을 서칭해도 잘 나오지 않아 실패 ...
