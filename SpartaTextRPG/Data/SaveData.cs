@@ -19,5 +19,9 @@ namespace SpartaTextRPG
         public int Gold {  get; set; }
         public int Exp { get; set; }
         public int ExpMax { get; set; }
+
+        public List<Item> InvenItemList = new List<Item>();
+
+        public Equip_Item[] equip_Item = new Equip_Item[(int)ItemSlotType.ITEMTYPE_MAX];
     }
 }

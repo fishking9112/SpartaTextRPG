@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -34,10 +35,44 @@ namespace SpartaTextRPG
         public void GameStart()
         {
             //플레이어 초기값 설정
-            player = new Player( "HuckP" , 1 , 100 , 10 , 20 , 5 , 15500);
+            //player = new Player( "HuckP" , 1 , 100 , 10 , 20 , 5 , 15500);
+
+            //player = LoadData();
+            player = SaveLoadManager.Instance.LoadFromJson<Player>();
+            if (player == null)
+                player = new Player("HuckP", 1, 100, 10, 20, 5, 15500);
+
 
             SceneManager.Instance.InitScene(player);
             SceneManager.Instance.MoveScene(SceneManager.EnumScene.SCENE_TOWN);
+        }
+
+        public Player LoadData()
+        {
+            //경로 - 실행파일과 같은 경로
+            string FilePath = "./PlayerData.json";
+
+            try
+            {
+                if (File.Exists(FilePath))
+                {
+                    //역직렬화
+                    string DeserializeJson = File.ReadAllText(FilePath);
+                    return JsonConvert.DeserializeObject<Player>(DeserializeJson);
+                }
+                else // 데이터가 없는 경우
+                {
+                    //기본 캐릭터 생성
+                    return new Player("HuckP", 1, 100, 10, 20, 5, 15500);
+                }
+            }
+            catch (Exception ex)    // 로드 실패시
+            {
+                Console.WriteLine($"Load 실패 !! : {ex}");
+
+                //기본 캐릭터 생성
+                return new Player("HuckP", 1, 100, 10, 20, 5, 15500);
+            }
         }
     }
 }

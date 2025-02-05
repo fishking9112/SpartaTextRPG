@@ -1,9 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.Serialization.Formatters.Binary;
+using System.Linq.Expressions;
+
+//using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
+
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace SpartaTextRPG
 {
@@ -22,8 +28,8 @@ namespace SpartaTextRPG
             Gold = _Gold;
 
             //장착 아이템 초기화
-            equip_Item[(int)ItemSlotType.ITEMTYPE_WEAPON] = null;
-            equip_Item[(int)ItemSlotType.ITEMTYPE_ARMOR] = null;
+            //equip_Item[(int)ItemSlotType.ITEMTYPE_WEAPON] = null;
+            //equip_Item[(int)ItemSlotType.ITEMTYPE_ARMOR] = null;
         }
 
         //Player 멤버변수
@@ -98,8 +104,8 @@ namespace SpartaTextRPG
         }
         public void SaveDate()
         {
-            BinaryFormatter bf = new BinaryFormatter();
-            FileStream fs = new FileStream("../SaveData.txt",FileMode.Create);
+            //BinaryFormatter bf = new BinaryFormatter();
+            //FileStream fs = new FileStream("../SaveData.txt",FileMode.Create);
 
             SaveData data = new SaveData();
 
@@ -114,16 +120,47 @@ namespace SpartaTextRPG
             data.Exp = this.Exp;
             data.ExpMax = this.MaxExp;
 
-            bf.Serialize(fs, data);
-            fs.Close();
+            //인벤토리 저장
+            data.InvenItemList = this.InvenItemList;
 
-            //브랜치 테스트
+            //장착 아이템 저장
+
+            data.equip_Item[(int)ItemSlotType.ITEMTYPE_WEAPON] = this.equip_Item[(int)ItemSlotType.ITEMTYPE_WEAPON];
+            data.equip_Item[(int)ItemSlotType.ITEMTYPE_ARMOR] = this.equip_Item[(int)ItemSlotType.ITEMTYPE_ARMOR];
+
+            //bf.Serialize(fs, data);
+            //fs.Close();
 
             // 저장기능 만들다가 실패 ㅠ
             // 시리얼라이즈 해서 바이너리 파일로 만들어보려 했으나 ,
             // 방법을 서칭해도 잘 나오지 않아 실패 ...
             // 제이슨 포멧을 만드는법을 공부하다 시간부족으로 제출합니당 ㅠ
 
+
+            //브랜치 테스트 - 성공
+            //Json 을 이용해서 저장 해보자.
+
+            //경로 - 실행파일과 같은 경로
+            string FilePath = "./PlayerData.json";
+            
+            try
+            {
+                // 직렬화 시키고
+                string serializeJson = JsonConvert.SerializeObject(this);
+                //Data 클래스를 따로 만들지 말고 자기 자신을 바로 저장해보자
+
+                //테스트를 위한 출력
+                //Console.WriteLine(serializeJson);
+
+                //파일로 만들자
+                File.WriteAllText(FilePath, serializeJson);
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Save 실패 !! : {ex}");
+            }
         }
+       
     }
 }

@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 namespace SpartaTextRPG
 {
     enum Item_Type { ITEM_USE , ITEM_EQUIP , ITEM_END }
-    internal class Item
+    class Item
     {
         public string Name { get; set; }
-        public string Description { get; }
+        public string Description { get; set; }
         public int Bonus { get; set; }
         public Item_Type Type { get; set; }
 

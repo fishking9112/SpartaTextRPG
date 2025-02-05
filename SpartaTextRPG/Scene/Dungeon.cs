@@ -50,30 +50,34 @@ namespace SpartaTextRPG
             {
                 SceneManager.Instance.MoveScene(SceneManager.EnumScene.SCENE_TOWN);
             }
-
-            bool isClear = EnterDungeon((DUNGEON_LEVEL)iSelect - 1);
-
-            if(isClear)
-            {
-                // 클리어
-                SceneManager.Instance.MoveScene(SceneManager.EnumScene.SCENE_DUNGEON);
-
-            }
             else
             {
-                Console.WriteLine("[ 던전 공략 실패 ! ]");
-                Console.WriteLine("강해져서 돌아오세요 ㅠㅠ");
-                Thread.Sleep(2000);
-                // 실패
-                SceneManager.Instance.MoveScene(SceneManager.EnumScene.SCENE_TOWN);
+
+                bool isClear = EnterDungeon((DUNGEON_LEVEL)iSelect - 1);
+
+                if (isClear)
+                {
+                    // 클리어
+                    SceneManager.Instance.MoveScene(SceneManager.EnumScene.SCENE_DUNGEON);
+
+                }
+                else
+                {
+                    Console.WriteLine("[ 던전 공략 실패 ! ]");
+                    Console.WriteLine("강해져서 돌아오세요 ㅠㅠ");
+                    Thread.Sleep(2000);
+                    // 실패
+                    SceneManager.Instance.MoveScene(SceneManager.EnumScene.SCENE_TOWN);
+                }
+
+
+                //던전에서 해야할것
+                //난이도 분기
+                //입장 함수에 매개변수로 난이도 넣어주기 ?
+                //입장 함수 내에서 클리어 여부 연산 후 반환
+                //난이도별로 보상
             }
 
-            
-            //던전에서 해야할것
-            //난이도 분기
-            //입장 함수에 매개변수로 난이도 넣어주기 ?
-            //입장 함수 내에서 클리어 여부 연산 후 반환
-            //난이도별로 보상
         }
         private bool EnterDungeon(DUNGEON_LEVEL _dungeon_Level)
         {

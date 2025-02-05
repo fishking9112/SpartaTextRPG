@@ -154,35 +154,47 @@ namespace SpartaTextRPG
                 //장착중이면
                 // 장착 해제
 
+                Equip_Item equip = SelectItem as Equip_Item;
+                Equip_Item equip_2 = (Equip_Item)SelectItem;
+
                 //웨폰인지 아머인지
-                ItemSlotType Type = ((Equip_Item)InvenItemList[iSelect - 1]).SlotType;
-
-                if (((Equip_Item)InvenItemList[iSelect - 1]).IsEquip == false) //장착중이 아님
+                if (SelectItem is Equip_Item)
                 {
+                    //Equip_Item equip = SelectItem as Equip_Item;
 
-                    if(_player.equip_Item[(int)Type] == null) // 해당 슬롯 칸이 비어있으면 ?
+                    ItemSlotType Type = equip.SlotType;
+
+                    if (equip.IsEquip == false) //장착중이 아님
                     {
-                        // 장착
-                        _player.equip_Item[(int)Type] = (Equip_Item)InvenItemList[iSelect - 1];
-                        ((Equip_Item)InvenItemList[iSelect - 1]).IsEquip = true;
+
+                        if (_player.equip_Item[(int)Type] == null) // 해당 슬롯 칸이 비어있으면 ?
+                        {
+                            // 장착
+                            _player.equip_Item[(int)Type] = (Equip_Item)InvenItemList[iSelect - 1];
+                            equip.IsEquip = true;
+                        }
+                        else  // 안비어있으면 ?
+                        {
+                            // 교체
+                            // 장착 해제
+                            _player.equip_Item[(int)Type].IsEquip = false;
+                            equip.IsEquip = false;
+                            // 장착
+                            _player.equip_Item[(int)Type] = (Equip_Item)InvenItemList[iSelect - 1];
+                            equip.IsEquip = true;
+                        }
                     }
-                    else  // 안비어있으면 ?
+                    else //장착중이면
                     {
-                        // 교체
                         // 장착 해제
                         _player.equip_Item[(int)Type].IsEquip = false;
-                        ((Equip_Item)InvenItemList[iSelect - 1]).IsEquip = false;
-                        // 장착
-                        _player.equip_Item[(int)Type] = (Equip_Item)InvenItemList[iSelect - 1];
-                        ((Equip_Item)InvenItemList[iSelect - 1]).IsEquip = true;
+                        equip.IsEquip = false;
                     }
                 }
-                else //장착중이면
+                else
                 {
-                    // 장착 해제
-                    _player.equip_Item[(int)Type].IsEquip = false;
-                    ((Equip_Item)InvenItemList[iSelect - 1]).IsEquip = false;
-
+                    //왜 여기로 들어오지 ??
+                    Equip_Item equip_Item = SelectItem as Equip_Item;
                 }
             }
 

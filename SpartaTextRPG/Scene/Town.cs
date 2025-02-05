@@ -34,6 +34,7 @@ namespace SpartaTextRPG
 
                     //저장은 실패 ...
                     //_player.SaveDate();
+                    SaveLoadManager.Instance.SaveToJson(_player);
 
                     SceneManager.Instance.MoveScene(SceneManager.EnumScene.SCENE_TOWN);
                     break;
