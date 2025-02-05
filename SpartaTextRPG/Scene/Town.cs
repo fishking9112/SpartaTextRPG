@@ -31,7 +31,10 @@ namespace SpartaTextRPG
             switch(iSelect)
             {
                 case 6:     // 저장 하고 다시 TOWN 재입장
-                    PlayerPrefs.getInt();
+
+                    //저장은 실패 ...
+                    //_player.SaveDate();
+
                     SceneManager.Instance.MoveScene(SceneManager.EnumScene.SCENE_TOWN);
                     break;
                 case 7:     // 종료

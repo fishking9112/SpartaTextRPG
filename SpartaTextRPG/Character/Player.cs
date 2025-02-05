@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -95,6 +96,32 @@ namespace SpartaTextRPG
                 Defense += 1;
             }
         }
+        public void SaveDate()
+        {
+            BinaryFormatter bf = new BinaryFormatter();
+            FileStream fs = new FileStream("../SaveData.txt",FileMode.Create);
 
+            SaveData data = new SaveData();
+
+            data.Name = this.Name;
+            data.Level = this.Level;
+            data.HP = this.HP;
+            data.MaxHP = this.MaxHP;
+            data.AttMin = this.AttackPower_Min;
+            data.AttMax = this.AttackPower_Max;
+            data.Def = this.Defense;
+            data.Gold = this.Gold;
+            data.Exp = this.Exp;
+            data.ExpMax = this.MaxExp;
+
+            bf.Serialize(fs, data);
+            fs.Close();
+
+            // 저장기능 만들다가 실패 ㅠ
+            // 시리얼라이즈 해서 바이너리 파일로 만들어보려 했으나 ,
+            // 방법을 서칭해도 잘 나오지 않아 실패 ...
+            // 제이슨 포멧을 만드는법을 공부하다 시간부족으로 제출합니당 ㅠ
+
+        }
     }
 }
