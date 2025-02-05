@@ -12,7 +12,7 @@ namespace SpartaTextRPG
         //메인게임 싱글톤으로 만들어주기
         private static MainGame? m_instance = null;
 
-        public ICharacter? player;
+        public Player? player;
 
         public static MainGame Instance
         {

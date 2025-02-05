@@ -11,10 +11,10 @@ namespace SpartaTextRPG
         public ShowInven()
         {
             this._player = MainGame.Instance.player;
-            InvenItemList = ((Player)_player).InvenItemList;
+            InvenItemList = _player.InvenItemList;
         }
 
-        private ICharacter _player;
+        private Player _player;
         private List<Item> InvenItemList;
 
         public void SceneMenuDraw()
@@ -152,27 +152,27 @@ namespace SpartaTextRPG
                 if (((Equip_Item)InvenItemList[iSelect - 1]).IsEquip == false) //장착중이 아님
                 {
 
-                    if(((Player)_player).equip_Item[(int)Type] == null) // 해당 슬롯 칸이 비어있으면 ?
+                    if(_player.equip_Item[(int)Type] == null) // 해당 슬롯 칸이 비어있으면 ?
                     {
                         // 장착
-                        ((Player)_player).equip_Item[(int)Type] = (Equip_Item)InvenItemList[iSelect - 1];
+                        _player.equip_Item[(int)Type] = (Equip_Item)InvenItemList[iSelect - 1];
                         ((Equip_Item)InvenItemList[iSelect - 1]).IsEquip = true;
                     }
                     else  // 안비어있으면 ?
                     {
                         // 교체
                         // 장착 해제
-                        ((Player)_player).equip_Item[(int)Type].IsEquip = false;
+                        _player.equip_Item[(int)Type].IsEquip = false;
                         ((Equip_Item)InvenItemList[iSelect - 1]).IsEquip = false;
                         // 장착
-                        ((Player)_player).equip_Item[(int)Type] = (Equip_Item)InvenItemList[iSelect - 1];
+                        _player.equip_Item[(int)Type] = (Equip_Item)InvenItemList[iSelect - 1];
                         ((Equip_Item)InvenItemList[iSelect - 1]).IsEquip = true;
                     }
                 }
                 else //장착중이면
                 {
                     // 장착 해제
-                    ((Player)_player).equip_Item[(int)Type].IsEquip = false;
+                    _player.equip_Item[(int)Type].IsEquip = false;
                     ((Equip_Item)InvenItemList[iSelect - 1]).IsEquip = false;
 
                 }

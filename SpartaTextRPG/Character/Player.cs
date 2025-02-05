@@ -42,17 +42,34 @@ namespace SpartaTextRPG
         public int AttackPower_Max { get; }
         public int Defense { get; set; }
         public bool IsDead => HP <= 0;
-        public void TakeDamage(int damage)
-        {
-            HP -= damage;
-            if (IsDead) Console.WriteLine($"{Name}이(가) 죽었습니다.");
-            else Console.WriteLine($"{Name}이(가) {damage}의 데미지를 받았습니다. 남은 체력: {HP}");
-        }
 
         ///////// Player
-        /// <summary>
-        /// 
-        /// </summary>
+        public int FinalDef()
+        {
+            int equip_Def = 0;
+
+            if (equip_Item[(int)ItemSlotType.ITEMTYPE_ARMOR] != null)
+            {
+                equip_Def = equip_Item[(int)ItemSlotType.ITEMTYPE_ARMOR].Bonus;
+            }
+
+            int _finalDef = Defense + equip_Def;
+
+            return _finalDef;
+        }
+        public int FinalAtt()
+        {
+            int equip_Att = 0;
+
+            if (equip_Item[(int)ItemSlotType.ITEMTYPE_WEAPON] != null)
+            {
+                equip_Att = equip_Item[(int)ItemSlotType.ITEMTYPE_WEAPON].Bonus;
+            }
+
+            int _finalAtt = ((AttackPower_Min + AttackPower_Max) / 2)  + equip_Att;
+
+            return _finalAtt;
+        }
 
     }
 }

@@ -32,9 +32,9 @@ namespace SpartaTextRPG
         private List<IScene> SceneList = new List<IScene>();
 
         //Player 갖고있기
-        ICharacter? player;
+        Player? player;
 
-        public void InitScene(ICharacter player)
+        public void InitScene(Player player)
         {
             this.player = player;
 

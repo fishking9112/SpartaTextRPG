@@ -13,15 +13,15 @@ namespace SpartaTextRPG
             this._player = MainGame.Instance.player;
         }
 
-        private ICharacter _player;
+        private Player _player;
         public void SceneMenuDraw()
         {
             //장착된 아이템
             Equip_Item equip_Weapon;
             Equip_Item equip_Armor;
 
-            equip_Weapon = ((Player)_player).equip_Item[(int)ItemSlotType.ITEMTYPE_WEAPON];
-            equip_Armor = ((Player)_player).equip_Item[(int)ItemSlotType.ITEMTYPE_ARMOR];
+            equip_Weapon = _player.equip_Item[(int)ItemSlotType.ITEMTYPE_WEAPON];
+            equip_Armor = _player.equip_Item[(int)ItemSlotType.ITEMTYPE_ARMOR];
 
             Console.Clear();
             Console.WriteLine("[ 상태보기 ]");
@@ -63,7 +63,7 @@ namespace SpartaTextRPG
                 Console.WriteLine(" Def : {0}", _player.Defense);
             }
 
-            Console.WriteLine(" Gold : {0}", ((Player)_player).Gold);
+            Console.WriteLine(" Gold : {0}", _player.Gold);
             Console.WriteLine(" \n 0. 돌아가기 : ");
 
             int iSelect = int.Parse(Console.ReadLine());

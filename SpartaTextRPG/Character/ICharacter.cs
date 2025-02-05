@@ -20,6 +20,5 @@ namespace SpartaTextRPG
         int AttackPower_Max { get; }
         int Defense { get; set; }
         bool IsDead { get; }
-        void TakeDamage(int damage);
     }
 }

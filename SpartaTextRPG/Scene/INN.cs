@@ -13,7 +13,7 @@ namespace SpartaTextRPG
             this._player = MainGame.Instance.player;
             price = 500;
         }
-        private ICharacter _player;
+        private Player _player;
 
         private int price;
 
@@ -21,7 +21,7 @@ namespace SpartaTextRPG
         {
             Console.Clear();
             Console.WriteLine("[ 여관 ]");
-            Console.WriteLine($"{price} G 를 내면 체력을 회복할 수 있습니다. \t ( 보유 골드 : {((Player)_player).Gold} G ) \n");
+            Console.WriteLine($"{price} G 를 내면 체력을 회복할 수 있습니다. \t ( 보유 골드 : {_player.Gold} G ) \n");
             Console.WriteLine(" 1. 휴식하기 ");
             Console.WriteLine(" 0. 돌아가기 ");
 

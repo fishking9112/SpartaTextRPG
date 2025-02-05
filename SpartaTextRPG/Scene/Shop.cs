@@ -14,12 +14,11 @@ namespace SpartaTextRPG
             ShopInit();
         }
 
-        private ICharacter _player;
+        private Player _player;
         private List<Item> ShopItemList = new List<Item>();
         public void ShopInit()
         {
             // 아이템 셋팅
-            // 이거
             Console.WriteLine("[ ShopInit ]");
 
             ShopItemList.Add(new Equip_Item("낡은 검" , "쉽게 볼 수 있는 낡은 검 입니다." , ItemSlotType.ITEMTYPE_WEAPON, 2 , 600 , Item_Type.ITEM_EQUIP));
@@ -72,7 +71,7 @@ namespace SpartaTextRPG
             Console.Clear();
             
             Console.WriteLine("[ 상점 ]");
-            Console.WriteLine($"현재 보유 금화 : {((Player)_player).Gold}");
+            Console.WriteLine($"현재 보유 금화 : {_player.Gold}");
 
             ShowShopMenu(false);
 
@@ -106,7 +105,7 @@ namespace SpartaTextRPG
                 Console.Clear();
 
                 Console.WriteLine("[ 상점 - 아이템 구매]");
-                Console.WriteLine($"현재 보유 금화 : {((Player)_player).Gold}");
+                Console.WriteLine($"현재 보유 금화 : {_player.Gold}");
 
                 ShowShopMenu(true);
 
@@ -142,17 +141,17 @@ namespace SpartaTextRPG
                 Item SelectItem = ShopItemList[iSelect - 1];
 
                 //이미 구매한 아이템인지 체크
-                int findIndex = ((Player)_player).InvenItemList.FindIndex(x => x.Name.Equals(SelectItem.Name));
+                int findIndex = _player.InvenItemList.FindIndex(x => x.Name.Equals(SelectItem.Name));
 
                  
                 if (findIndex < 0) // 보유중이 아님
                 {
 
                     // 금화 체크
-                    if( ((Player)_player).Gold >= SelectItem.Price)
+                    if( _player.Gold >= SelectItem.Price)
                     {
-                        ((Player)_player).Gold -= SelectItem.Price;
-                        ((Player)_player).InvenItemList.Add(SelectItem);
+                        _player.Gold -= SelectItem.Price;
+                        _player.InvenItemList.Add(SelectItem);
                         Console.WriteLine($"{SelectItem.Name} 을(를) {SelectItem.Price} 금화에 구매하였습니다 !");
                         Thread.Sleep(1000);
                     }
@@ -174,7 +173,7 @@ namespace SpartaTextRPG
         
         private void ShowSellMenu()
         {
-            List<Item> InvenItemList = ((Player)_player).InvenItemList;
+            List<Item> InvenItemList = _player.InvenItemList;
 
             int MenuNumber = 1;
             foreach (Item item in InvenItemList)
@@ -227,12 +226,12 @@ namespace SpartaTextRPG
         {
             while(true)
             {
-                List<Item> InvenItemList = ((Player)_player).InvenItemList;
+                List<Item> InvenItemList = _player.InvenItemList;
 
                 Console.Clear();
 
                 Console.WriteLine("[ 상점 - 아이템 판매]");
-                Console.WriteLine($"현재 보유 금화 : {((Player)_player).Gold}");
+                Console.WriteLine($"현재 보유 금화 : {_player.Gold}");
 
                 ShowSellMenu();
 
@@ -265,7 +264,7 @@ namespace SpartaTextRPG
                 if (((Equip_Item)InvenItemList[iSelect - 1]).IsEquip == true) //장착중이면
                 {
                     //장착슬롯에서 빼주고
-                    ((Player)_player).equip_Item[(int)Type].IsEquip = false;
+                    _player.equip_Item[(int)Type].IsEquip = false;
                     ((Equip_Item)InvenItemList[iSelect - 1]).IsEquip = false;
                 }
 
@@ -274,7 +273,7 @@ namespace SpartaTextRPG
 
                 //판매 가격은 구매가격의 85%
                 float sellPrice = ((float)SelectItem.Price / 100) * 85;
-                ((Player)_player).Gold += (int)sellPrice;
+                _player.Gold += (int)sellPrice;
             }
         }
     }
